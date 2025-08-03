@@ -1,0 +1,12 @@
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+tensorflow
+streamlit
+opencv-python
+plotly
+pillow
+google-generative-ai
+python-dotenv
