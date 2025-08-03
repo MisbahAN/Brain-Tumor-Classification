@@ -1,8 +1,8 @@
-# 🧠 Brain Tumor Classification - FastAPI Backend
+# 🧠 Brain Tumor Classification - Streamlit App
 
 **Advanced AI-Powered Brain Tumor Detection System using Deep Learning**
 
-This repository contains the **backend implementation** of an intelligent brain tumor classification system that leverages state-of-the-art deep learning techniques to analyze MRI scans and provide accurate tumor type predictions with AI-generated explanations.
+This repository contains a **Streamlit web application** for an intelligent brain tumor classification system that leverages state-of-the-art deep learning techniques to analyze MRI scans and provide accurate tumor type predictions with AI-generated explanations.
 
 ## 🎯 Project Overview
 
@@ -85,31 +85,43 @@ The trained Xception model achieves exceptional performance metrics:
 
 ### Sample Predictions
 
-**Glioma Detection Example:**
-![Glioma Prediction](research/documentation/glioma_prediction_result.png)
-
-**Meningioma Detection Example:**
-![Meningioma Prediction](research/documentation/meningioma_prediction_result.png)
+<div align="center">
+<table>
+<tr>
+<td align="center">
+<strong>Glioma Detection Example</strong><br>
+<img src="research/documentation/glioma_prediction_result.png" width="400" alt="Glioma Prediction">
+</td>
+<td align="center">
+<strong>Meningioma Detection Example</strong><br>
+<img src="research/documentation/meningioma_prediction_result.png" width="400" alt="Meningioma Prediction">
+</td>
+</tr>
+</table>
+</div>
 
 ## 🗂️ Project Structure
 
 ```
 Brain-Tumor-Classification/
-├── 🚀 app/                                 # FastAPI Application
-│   ├── 📋 models/                          # Pydantic models & ML model classes
-│   ├── ⚙️  services/                       # Business logic & ML inference
-│   ├── 🛣️  routes/                         # API endpoints
-│   ├── 🔧 utils/                           # Helper functions
-│   ├── ⚙️  config/                         # Configuration files
-│   └── 📦 requirements.txt                 # Python dependencies
+├── 🎯 app.py                               # Main Streamlit application
+├── 📦 requirements.txt                     # Python dependencies
+├── 🔧 utils/                               # Helper functions & utilities
+│   ├── model_loader.py                     # Model loading & preprocessing
+│   ├── image_processing.py                 # Image processing functions
+│   └── prediction_utils.py                 # Prediction & post-processing
+├── 📄 pages/                               # Streamlit multi-page components
+│   ├── 🏠 Home.py                          # Main prediction page
+│   ├── 📊 Model_Performance.py             # Model metrics & visualizations
+│   ├── 🖼️  Sample_Images.py                # Pre-made sample testing
+│   └── ℹ️  About.py                         # Project information
 ├── 🤖 models/                              # Trained Model Weights
 │   └── xception_model.weights.h5           # Trained Xception model (253MB)
-├── 📤 uploads/                             # User uploaded images (temp storage)
 ├── 🖼️  sample_images/                      # Pre-made sample images
-│   ├── Te-glTr_0000.jpg                    # Glioma samples
-│   ├── Te-meTr_0000.jpg                    # Meningioma samples
-│   ├── Te-noTr_0000.jpg                    # No tumor samples
-│   └── Te-piTr_0000.jpg                    # Pituitary samples
+│   ├── Te-glTr_0000.jpg                    # Glioma samples (3 images)
+│   ├── Te-meTr_0000.jpg                    # Meningioma samples (3 images)
+│   ├── Te-noTr_0000.jpg                    # No tumor samples (3 images)
+│   └── Te-piTr_0000.jpg                    # Pituitary samples (3 images)
 ├── 🔬 research/                            # Research & Documentation
 │   ├── 📓 notebooks/                       # Jupyter notebooks
 │   │   └── BrainTumorClassification.ipynb
@@ -134,17 +146,18 @@ Brain-Tumor-Classification/
 - 🤖 **CNN Model Integration** - Implement custom CNN architecture alongside Xception
 - 🤝 **Gemini Integration** - Add Google Gemini 2.5 Flash for AI-powered explanations
 - 📊 **Model Interpretability** - Implement GRAD-CAM for visual explanations
-- 🔐 **Authentication** - Add user authentication and session management
-- 📈 **Model Monitoring** - Performance tracking and model drift detection
+- 🎨 **Enhanced UI/UX** - Improved Streamlit interface with custom styling
+- 📈 **Model Comparison** - Side-by-side comparison of different model architectures
+- 📱 **Mobile Optimization** - Responsive design for mobile devices
 
 ### Technical Roadmap
 
-- [ ] **API Development** - FastAPI endpoints for prediction and sample images
+- [ ] **Streamlit App Development** - Interactive web interface for brain tumor classification
 - [ ] **Model Pipeline** - Production-ready inference pipeline
 - [ ] **Image Processing** - Advanced preprocessing and augmentation
-- [ ] **Response Format** - Structured JSON responses with confidence scores
-- [ ] **Error Handling** - Comprehensive error handling and validation
-- [ ] **Documentation** - OpenAPI/Swagger documentation
+- [ ] **Multi-page App** - Organized sections for prediction, performance, and samples
+- [ ] **Error Handling** - Comprehensive validation and user feedback
+- [ ] **Performance Optimization** - Caching and efficient model loading
 
 ## 🔬 Dataset Information
 
@@ -156,28 +169,29 @@ Brain-Tumor-Classification/
 
 ## 🌐 Deployment Architecture
 
-This backend is designed for **separate deployment** from the frontend:
+This Streamlit application is designed for **easy deployment** on various platforms:
 
-- **Backend (This Repo)**: FastAPI + ML Model → Deploy to Render
-- **Frontend**: Next.js + TypeScript → Deploy to Vercel
-- **Communication**: RESTful APIs with JSON responses
-- **Storage**: Temporary file uploads, cloud storage integration ready
+- **Streamlit Cloud**: Direct GitHub integration, free hosting for public repos
+- **Heroku**: Container-based deployment with model file support
+- **Railway**: Simple deployment with generous resource limits
+- **Google Cloud Run**: Scalable serverless deployment
+- **AWS EC2**: Full control over compute resources
 
 ## 🛠️ Installation & Setup
 
-_Coming Soon - Production pipeline implementation in progress_
+_Coming Soon - Streamlit app implementation in progress_
 
 ## 🚀 Usage
 
-_Coming Soon - API endpoints and usage examples_
+_Coming Soon - Streamlit app interface and features_
 
-## 📋 API Documentation
+## 📱 App Features
 
-_Coming Soon - OpenAPI/Swagger documentation_
+_Coming Soon - Interactive components and user interface_
 
 ## 🧪 Testing
 
-_Coming Soon - Test suite and validation procedures_
+_Coming Soon - Model validation and testing procedures_
 
 ---
 
@@ -188,4 +202,4 @@ Portfolio: [MisbahAN.com](https://MisbahAN.com)
 
 ---
 
-_This project represents the backend implementation of an AI-powered brain tumor classification system. The frontend interface will be developed separately for optimal deployment flexibility._
+_This project represents a complete Streamlit web application for AI-powered brain tumor classification with an intuitive interface for medical professionals and researchers._
