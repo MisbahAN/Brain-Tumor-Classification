@@ -1,0 +1,22 @@
+- This dataset contains 7023 images of human brain MRI images which are classified into 4 classes: glioma, meningio, no tumor and pituitary (Brain-Tumor-Classification/Public/tumor_classification.png).
+- run this in root directory to get dataset '! kaggle datasets download -d masoudnickparvar/brain-tumor-mri-dataset --unzip'
+
+- 🧠 Why Classifying Brain Tumors with AI Matters
+-- MRI scans come in a wide range of shapes, sizes, orientations, and brightness levels (Brain-Tumor-Classification/Public/different_types_of_images.png). Some scans are taken from the side, others from the top, and even though these variations exist, they often contain the same type of tumor.
+-- This variability makes it difficult, even for experienced neurologists and neurosurgeons, to confidently distinguish between tumor types just by visually examining the scans. The subtle differences and inconsistencies can easily lead to misclassification by humans.
+-- This is precisely why machine learning models are valuable in this context. They bring consistency and precision to tumor classification, supporting the diagnostic process. By analyzing patterns across thousands of scans, these models can help doctors make more accurate and confident predictions about the type of tumor present.
+-- Additionally, by visualizing what the model is focusing on, doctors gain insight into how predictions are made — enhancing both trust and interpretability of the AI system.
+
+NOTES
+- Pay attention that The size of the images in this dataset is different. You can resize the image to the desired size after pre-processing and removing the extra margins. This work will improve the accuracy of the model code.
+- We use the Xception model for transfer learning because it’s a powerful, pre-trained neural network developed by Google that excels at image classification tasks. By leveraging its ability to break down images into meaningful parts and analyze them efficiently, we can achieve high accuracy on brain MRI scans even with limited medical data. Just like if you were to focus on parts of an animal like the fur, eyes, or paws before deciding what animal you're looking at.
+- Brain-Tumor-Classification/Public/model_architecture.png
+- Brain-Tumor-Classification/Public/model_flow.png
+- Brain-Tumor-Classification/Public/model_training_metrics_over_epochs.png
+- Brain-Tumor-Classification/Public/glioma_prediction_result.png and Brain-Tumor-Classification/Public/meningioma_prediction_result.png
+- Train Accuracy: 99.95%
+- Train Loss: 0.0032
+- Validation Accuracy: 99.24%
+- Validation Loss: 0.0239
+- Test Accuracy: 98.48%
+- Test Loss: 0.0626

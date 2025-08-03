@@ -1,7 +1,6 @@
 venv/
 Testing/
 Training/
-findings.txt
 kaggle.json
 .env
 models/xception_model.weights.h5
