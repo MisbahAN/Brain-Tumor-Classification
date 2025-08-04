@@ -371,7 +371,7 @@ with col1:
     st.markdown("### Select Input Method")
     
     input_method = st.radio(
-        "",
+        "Input Method",
         ["Use Sample Image", "Upload Your Own"],
         label_visibility="collapsed"
     )
@@ -381,7 +381,7 @@ with col1:
     if input_method == "Use Sample Image":
         st.markdown("<p style='margin-top: 1rem; margin-bottom: 0.5rem;'>Choose a sample MRI scan:</p>", unsafe_allow_html=True)
         selected_sample = st.selectbox(
-            "",
+            "Sample Selection",
             list(sample_images.keys()),
             format_func=lambda x: sample_images[x],
             label_visibility="collapsed"
@@ -401,7 +401,7 @@ with col1:
     else:
         st.markdown("<p style='margin-top: 1rem; margin-bottom: 0.5rem;'>Upload a brain MRI scan:</p>", unsafe_allow_html=True)
         uploaded_file = st.file_uploader(
-            "",
+            "File Upload",
             type=['jpg', 'jpeg', 'png'],
             label_visibility="collapsed"
         )
