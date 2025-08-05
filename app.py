@@ -20,12 +20,12 @@ st.set_page_config(
 # Custom CSS for clean white and purple theme
 st.markdown("""
 <style>
-    /* Import clean font */
+    /* Import Inter font (similar to Claude's) */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     
     /* Global reset and styles */
     * {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
     }
     
     /* Hide sidebar completely */
@@ -35,11 +35,44 @@ st.markdown("""
     
     /* Main app background */
     .stApp {
-        background-color: #FFFFFF;
+        background-color: #FAFAFA;
+        min-height: 100vh;
+        position: relative;
     }
     
     .main {
-        background-color: #FFFFFF;
+        background-color: #FAFAFA;
+        padding: 2rem 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    /* Center all content */
+    .block-container {
+        max-width: 1000px !important;
+        padding-top: 3rem !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        padding-bottom: 0 !important;
+        margin: 0 auto !important;
+    }
+    
+    /* Fix streamlit header overlap */
+    .stApp > header {
+        height: 3rem !important;
+    }
+    
+    /* Remove empty containers */
+    .element-container:has(.stMarkdown:empty) {
+        display: none !important;
+    }
+    
+    .element-container:empty {
+        display: none !important;
+    }
+    
+    div[data-testid="stVerticalBlock"] > div:has(div:empty):only-child {
+        display: none !important;
     }
     
     /* All text in purple */
@@ -50,71 +83,97 @@ st.markdown("""
     /* Main title */
     h1 {
         text-align: center;
-        font-weight: 700;
-        font-size: 2.5rem !important;
-        margin-bottom: 3rem !important;
+        font-weight: 600;
+        font-size: 2rem !important;
+        margin-top: 0 !important;
+        margin-bottom: 2rem !important;
+        padding-top: 1rem !important;
         color: #6B46C1 !important;
+        letter-spacing: -0.5px;
+    }
+    
+    /* First h1 needs extra top margin to clear header */
+    .main > div:first-child h1 {
+        margin-top: 1rem !important;
     }
     
     /* Section headers */
     h3 {
-        font-size: 1.3rem !important;
+        font-size: 1.1rem !important;
         font-weight: 600 !important;
-        margin-bottom: 1.5rem !important;
+        margin-bottom: 1rem !important;
         color: #6B46C1 !important;
+        text-align: center;
     }
     
     h4 {
-        font-size: 1.1rem !important;
+        font-size: 0.95rem !important;
         font-weight: 600 !important;
         color: #6B46C1 !important;
     }
     
-    /* Remove all emojis from headers */
-    h3:before, h4:before {
-        content: none !important;
+    /* Card container styling - REMOVED since we're not using containers */
+    
+    /* Input method buttons (radio buttons styled as buttons) */
+    .stRadio > div {
+        display: flex !important;
+        gap: 0.75rem !important;
+        background: transparent !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        justify-content: center !important;
+        margin-top: 1rem !important;
     }
     
-    /* Card container styling */
-    .card-container {
-        background-color: #FFFFFF;
-        border-radius: 12px;
-        padding: 2rem;
-        box-shadow: 0 4px 12px rgba(107, 70, 193, 0.1);
-        margin-bottom: 1.5rem;
+    .stRadio > div > label {
+        flex: 1 !important;
+        background-color: #FFFFFF !important;
+        border: 2px solid #E9D5FF !important;
+        border-radius: 8px !important;
+        padding: 0.75rem 1.5rem !important;
+        text-align: center !important;
+        cursor: pointer !important;
+        font-weight: 500 !important;
+        font-size: 0.9rem !important;
+        transition: none !important;
+        margin: 0 !important;
     }
     
-    /* Button styling - clean and modern */
+    .stRadio > div > label > div {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    .stRadio > div > label:has(input:checked) {
+        background-color: #F3E8FF !important;
+        border-color: #6B46C1 !important;
+    }
+    
+    /* Hide radio circles */
+    .stRadio > div > label > div > input[type="radio"] {
+        display: none !important;
+    }
+    
+    /* Button styling - modern outline design */
     .stButton > button {
         background-color: #FFFFFF !important;
         color: #6B46C1 !important;
         border: 2px solid #6B46C1 !important;
-        box-shadow: 0 2px 8px rgba(107, 70, 193, 0.15) !important;
-        font-weight: 600 !important;
-        padding: 0.75rem 2rem !important;
+        box-shadow: 0 1px 3px rgba(107, 70, 193, 0.12) !important;
+        font-weight: 500 !important;
+        padding: 0.6rem 1.5rem !important;
         border-radius: 8px !important;
         transition: none !important;
         width: 100% !important;
-        font-size: 1rem !important;
+        font-size: 0.9rem !important;
+        letter-spacing: 0.2px !important;
     }
     
     .stButton > button:hover {
         background-color: #FFFFFF !important;
-        box-shadow: 0 2px 8px rgba(107, 70, 193, 0.15) !important;
+        box-shadow: 0 1px 3px rgba(107, 70, 193, 0.12) !important;
         border: 2px solid #6B46C1 !important;
-    }
-    
-    /* Radio button styling */
-    .stRadio > div {
-        background-color: #FFFFFF !important;
-        padding: 1rem !important;
-        border-radius: 8px !important;
-        box-shadow: 0 2px 8px rgba(107, 70, 193, 0.1) !important;
-    }
-    
-    .stRadio label {
-        color: #6B46C1 !important;
-        font-weight: 500 !important;
     }
     
     /* Selectbox styling */
@@ -123,31 +182,38 @@ st.markdown("""
         border: 2px solid #E9D5FF !important;
         border-radius: 8px !important;
         color: #6B46C1 !important;
+        font-size: 0.9rem !important;
     }
     
     .stSelectbox label {
         color: #6B46C1 !important;
         font-weight: 500 !important;
         margin-bottom: 0.5rem !important;
+        font-size: 0.9rem !important;
+        text-align: center !important;
+        display: block !important;
     }
     
     /* File uploader - clean white */
     [data-testid="stFileUploader"] {
-        background-color: #FFFFFF !important;
+        background-color: transparent !important;
     }
     
     [data-testid="stFileUploaderDropzone"] {
         background-color: #FFFFFF !important;
         border: 2px dashed #E9D5FF !important;
         border-radius: 8px !important;
+        padding: 1.5rem !important;
     }
     
     [data-testid="stFileUploaderDropzone"]:hover {
         border-color: #6B46C1 !important;
+        background-color: #FFFFFF !important;
     }
     
     .uploadedFileName {
         color: #6B46C1 !important;
+        font-size: 0.85rem !important;
     }
     
     /* Metrics - modern card style */
@@ -155,19 +221,22 @@ st.markdown("""
         background-color: #FFFFFF !important;
         border: 1px solid #E9D5FF !important;
         border-radius: 8px !important;
-        padding: 1.25rem !important;
-        box-shadow: 0 2px 8px rgba(107, 70, 193, 0.08) !important;
+        padding: 1rem !important;
+        box-shadow: 0 1px 3px rgba(107, 70, 193, 0.08) !important;
     }
     
     [data-testid="metric-container"] label {
         color: #6B46C1 !important;
         font-weight: 500 !important;
-        font-size: 0.9rem !important;
+        font-size: 0.8rem !important;
+        text-align: center !important;
     }
     
     [data-testid="metric-container"] [data-testid="metric-value"] {
         color: #6B46C1 !important;
-        font-weight: 700 !important;
+        font-weight: 600 !important;
+        font-size: 1.1rem !important;
+        text-align: center !important;
     }
     
     /* Progress bar */
@@ -185,38 +254,30 @@ st.markdown("""
         color: #6B46C1 !important;
         border: 1px solid #E9D5FF !important;
         border-radius: 8px !important;
+        font-size: 0.9rem !important;
     }
     
     /* Image container */
     .stImage {
         border-radius: 8px !important;
         overflow: hidden !important;
-        box-shadow: 0 2px 8px rgba(107, 70, 193, 0.1) !important;
+        box-shadow: 0 2px 6px rgba(107, 70, 193, 0.1) !important;
     }
     
-    /* Expander styling */
-    .streamlit-expanderHeader {
-        background-color: #FFFFFF !important;
-        color: #6B46C1 !important;
-        border: 1px solid #E9D5FF !important;
-        border-radius: 8px !important;
-        font-weight: 500 !important;
-    }
+    /* About section styling - REMOVED since we're not using containers */
     
-    .streamlit-expanderContent {
-        background-color: #FFFFFF !important;
-        border: 1px solid #E9D5FF !important;
-        border-top: none !important;
-    }
-    
-    /* Footer */
+    /* Footer - fixed at bottom */
     .footer {
         text-align: center;
-        padding: 2rem 0;
+        padding: 1.5rem 0;
         color: #6B46C1;
-        font-size: 0.9rem;
-        margin-top: 4rem;
+        font-size: 0.85rem;
+        margin-top: 3rem;
         border-top: 1px solid #E9D5FF;
+        background-color: #FAFAFA;
+        position: relative;
+        bottom: 0;
+        width: 100%;
     }
     
     .footer a {
@@ -232,29 +293,22 @@ st.markdown("""
     
     /* Remove default Streamlit styling */
     .css-1d391kg {
-        background-color: #FFFFFF !important;
+        background-color: transparent !important;
     }
     
     /* Column gaps and padding */
     [data-testid="column"] {
-        background-color: #FFFFFF !important;
-        padding: 0 1rem !important;
+        background-color: transparent !important;
+        padding: 0 0.75rem !important;
     }
     
-    /* Results container */
-    .results-container {
-        background-color: #FFFFFF;
-        border-radius: 12px;
-        padding: 2rem;
-        box-shadow: 0 4px 12px rgba(107, 70, 193, 0.1);
-    }
-    
-    /* Probability bars container */
+    /* Probability bars styling */
     .prob-container {
-        background-color: #FFFFFF;
+        background-color: #FAFAFA;
         padding: 1rem;
         border-radius: 8px;
         margin-top: 1rem;
+        border: 1px solid rgba(107, 70, 193, 0.05);
     }
     
     /* Hide streamlit menu and footer */
@@ -264,6 +318,46 @@ st.markdown("""
     /* Spinner text */
     .stSpinner > div {
         color: #6B46C1 !important;
+        font-size: 0.9rem !important;
+    }
+    
+    /* Remove extra padding and margins */
+    .css-1y4p8pa {
+        max-width: none !important;
+        padding: 0 !important;
+    }
+    
+    /* Ensure content is centered */
+    .css-1aumxe8 {
+        max-width: 1000px !important;
+        margin: 0 auto !important;
+    }
+    
+    /* Make success message more subtle */
+    .stSuccess {
+        background-color: #F3E8FF !important;
+        color: #6B46C1 !important;
+        border: 1px solid #E9D5FF !important;
+        font-size: 0.85rem !important;
+        padding: 0.5rem 1rem !important;
+        text-align: center !important;
+    }
+    
+    /* Style for all paragraphs */
+    p {
+        font-size: 0.9rem !important;
+        text-align: center !important;
+    }
+    
+    /* Remove any empty card containers */
+    .stContainer > div:empty {
+        display: none !important;
+    }
+    
+    /* Ensure main container has proper spacing */
+    .main .block-container {
+        padding-top: 0 !important;
+        padding-bottom: 2rem !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -367,8 +461,8 @@ st.markdown("<h1>Brain Tumor Classification</h1>", unsafe_allow_html=True)
 col1, col2 = st.columns([1, 1], gap="large")
 
 with col1:
-    st.markdown('<div class="card-container">', unsafe_allow_html=True)
-    st.markdown("### Select Input Method")
+    # Input method section
+    st.markdown("<h3>Select Input Method</h3>", unsafe_allow_html=True)
     
     input_method = st.radio(
         "Input Method",
@@ -379,7 +473,7 @@ with col1:
     image_to_analyze = None
     
     if input_method == "Use Sample Image":
-        st.markdown("<p style='margin-top: 1rem; margin-bottom: 0.5rem;'>Choose a sample MRI scan:</p>", unsafe_allow_html=True)
+        st.markdown("<p style='margin-top: 2rem; margin-bottom: 0.5rem;'>Choose a sample MRI scan:</p>", unsafe_allow_html=True)
         selected_sample = st.selectbox(
             "Sample Selection",
             list(sample_images.keys()),
@@ -399,7 +493,7 @@ with col1:
             st.error("Sample image not found. Please check the file path.")
     
     else:
-        st.markdown("<p style='margin-top: 1rem; margin-bottom: 0.5rem;'>Upload a brain MRI scan:</p>", unsafe_allow_html=True)
+        st.markdown("<p style='margin-top: 2rem; margin-bottom: 0.5rem;'>Upload a brain MRI scan:</p>", unsafe_allow_html=True)
         uploaded_file = st.file_uploader(
             "File Upload",
             type=['jpg', 'jpeg', 'png'],
@@ -413,12 +507,10 @@ with col1:
             col_img1, col_img2, col_img3 = st.columns([1, 2, 1])
             with col_img2:
                 st.image(image_to_analyze, use_container_width=True)
-    
-    st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
-    st.markdown('<div class="results-container">', unsafe_allow_html=True)
-    st.markdown("### Analysis Results")
+    # Results section
+    st.markdown("<h3>Analysis Results</h3>", unsafe_allow_html=True)
     
     if image_to_analyze is not None:
         if st.button("Analyze Image", use_container_width=True):
@@ -463,7 +555,7 @@ with col2:
             st.success("Analysis Complete")
             
             # Main prediction
-            st.markdown(f"### Detected: **{results['predicted_class']}**")
+            st.markdown(f"<h4 style='margin-top: 1rem;'>Detected: <strong>{results['predicted_class']}</strong></h4>", unsafe_allow_html=True)
             
             # Metrics in clean cards
             col_metric1, col_metric2 = st.columns(2)
@@ -473,8 +565,7 @@ with col2:
                 st.metric("Model Accuracy", "98.48%")
             
             # Probability distribution
-            st.markdown('<div class="prob-container">', unsafe_allow_html=True)
-            st.markdown("#### Probability Distribution")
+            st.markdown("<h4 style='margin-top: 2rem; margin-bottom: 1rem;'>Probability Distribution</h4>", unsafe_allow_html=True)
             
             for idx, (class_name, prob) in enumerate(zip(class_dict.values(), results['probabilities'])):
                 prob_percent = prob * 100
@@ -483,43 +574,44 @@ with col2:
                     f"""
                     <div style="margin-bottom: 12px;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                            <span style="color: #6B46C1; font-weight: 500;">{class_name}</span>
-                            <span style="color: #6B46C1; font-weight: 600;">{prob_percent:.1f}%</span>
+                            <span style="color: #6B46C1; font-weight: 500; font-size: 0.85rem;">{class_name}</span>
+                            <span style="color: #6B46C1; font-weight: 600; font-size: 0.85rem;">{prob_percent:.1f}%</span>
                         </div>
-                        <div style="background-color: #F3E8FF; border-radius: 4px; height: 20px; overflow: hidden;">
+                        <div style="background-color: #F3E8FF; border-radius: 4px; height: 16px; overflow: hidden;">
                             <div style="background-color: {color}; width: {prob_percent}%; height: 100%; transition: width 0.3s ease;"></div>
                         </div>
                     </div>
                     """,
                     unsafe_allow_html=True
                 )
-            st.markdown('</div>', unsafe_allow_html=True)
             
             # Analyze new image button
+            st.markdown("<div style='margin-top: 2rem;'>", unsafe_allow_html=True)
             if st.button("Analyze New Image", use_container_width=True):
                 st.session_state.analysis_done = False
                 st.rerun()
+            st.markdown("</div>", unsafe_allow_html=True)
     else:
         st.info("Please select or upload an MRI image to begin analysis")
-    
-    st.markdown('</div>', unsafe_allow_html=True)
 
 # Model information
-st.markdown("<div style='margin-top: 3rem;'>", unsafe_allow_html=True)
-with st.expander("About the Model"):
-    st.markdown("""
-    This brain tumor classification system uses a deep learning model based on the **Xception** architecture:
-    
-    - **Model Architecture**: Xception (pre-trained on ImageNet) with custom classification layers
-    - **Training Accuracy**: 99.95%
-    - **Validation Accuracy**: 99.24%
-    - **Test Accuracy**: 98.48%
-    - **Classes**: Glioma, Meningioma, No Tumor, Pituitary
-    - **Input Size**: 299x299 RGB images
-    
-    The model was trained on a comprehensive dataset of brain MRI scans and can classify four different conditions with high accuracy.
-    """)
-st.markdown("</div>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center; margin-top: 3rem; margin-bottom: 1rem;'>About the Model</h4>", unsafe_allow_html=True)
+st.markdown("""
+<div style='max-width: 800px; margin: 0 auto; text-align: left;'>
+
+This brain tumor classification system uses a deep learning model based on the **Xception** architecture:
+
+- **Model Architecture**: Xception (pre-trained on ImageNet) with custom classification layers
+- **Training Accuracy**: 99.95%
+- **Validation Accuracy**: 99.24%
+- **Test Accuracy**: 98.48%
+- **Classes**: Glioma, Meningioma, No Tumor, Pituitary
+- **Input Size**: 299x299 RGB images
+
+The model was trained on a comprehensive dataset of brain MRI scans and can classify four different conditions with high accuracy.
+
+</div>
+""", unsafe_allow_html=True)
 
 # Footer
 st.markdown(
