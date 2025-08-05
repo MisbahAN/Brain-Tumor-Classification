@@ -1,8 +1,8 @@
-# 🧠 Brain Tumor Classification - Streamlit App
+# 🧠 Brain Tumor Classification
 
-**Advanced AI-Powered Brain Tumor Detection System using Deep Learning**
+**AI-Powered Brain Tumor Detection using Deep Learning**
 
-This repository contains a **Streamlit web application** for an intelligent brain tumor classification system that leverages state-of-the-art deep learning techniques to analyze MRI scans and provide accurate tumor type predictions with AI-generated explanations.
+This repository contains a brain tumor classification system that uses deep learning to analyze MRI scans and classify them into four categories. The project includes a Streamlit web application for easy interaction with the trained model.
 
 ## 🎯 Project Overview
 
@@ -104,60 +104,77 @@ The trained Xception model achieves exceptional performance metrics:
 
 ```
 Brain-Tumor-Classification/
-├── 🎯 app.py                               # Main Streamlit application
-├── 📦 requirements.txt                     # Python dependencies
-├── 🔧 utils/                               # Helper functions & utilities
-│   ├── model_loader.py                     # Model loading & preprocessing
-│   ├── image_processing.py                 # Image processing functions
-│   └── prediction_utils.py                 # Prediction & post-processing
-├── 📄 pages/                               # Streamlit multi-page components
-│   ├── 🏠 Home.py                          # Main prediction page
-│   ├── 📊 Model_Performance.py             # Model metrics & visualizations
-│   ├── 🖼️  Sample_Images.py                # Pre-made sample testing
-│   └── ℹ️  About.py                         # Project information
-├── 🤖 models/                              # Trained Model Weights
-│   └── xception_model.weights.h5           # Trained Xception model (253MB)
-├── 🖼️  sample_images/                      # Pre-made sample images
-│   ├── Te-glTr_0000.jpg                    # Glioma samples (3 images)
-│   ├── Te-meTr_0000.jpg                    # Meningioma samples (3 images)
-│   ├── Te-noTr_0000.jpg                    # No tumor samples (3 images)
-│   └── Te-piTr_0000.jpg                    # Pituitary samples (3 images)
-├── 🔬 research/                            # Research & Documentation
-│   ├── 📓 notebooks/                       # Jupyter notebooks
-│   │   └── BrainTumorClassification.ipynb
-│   └── 📚 documentation/                   # Project insights & visualizations
-│       ├── findings.txt                    # Research findings & insights
-│       ├── model_architecture.png          # Model architecture diagram
-│       ├── model_training_metrics_over_epochs.png
-│       ├── tumor_classification.png        # Tumor types visualization
-│       ├── different_types_of_images.png
-│       ├── glioma_prediction_result.png
-│       └── meningioma_prediction_result.png
-├── 🗃️  Testing/                            # Original dataset (preserved)
-├── 🗃️  Training/                           # Original dataset (preserved)
-└── 📖 README.md                            # Project documentation
+├── app.py                                  # Main Streamlit application
+├── requirements.txt                        # Python dependencies
+├── README.md                               # Project documentation
+├── models/                                 # Trained model weights
+│   └── xception_model.weights.h5           # Xception model weights (253MB)
+├── sample_images/                          # Sample MRI images for testing
+│   ├── Te-glTr_0000.jpg                    # Glioma samples
+│   ├── Te-glTr_0001.jpg
+│   ├── Te-glTr_0002.jpg
+│   ├── Te-meTr_0000.jpg                    # Meningioma samples  
+│   ├── Te-meTr_0001.jpg
+│   ├── Te-meTr_0002.jpg
+│   ├── Te-noTr_0000.jpg                    # No tumor samples
+│   ├── Te-noTr_0001.jpg
+│   ├── Te-noTr_0002.jpg
+│   ├── Te-piTr_0000.jpg                    # Pituitary samples
+│   ├── Te-piTr_0001.jpg
+│   └── Te-piTr_0002.jpg
+├── research/                               # Research and development
+│   ├── notebooks/
+│   │   └── BrainTumorClassification.ipynb  # Model training notebook
+│   └── documentation/
+│       └── findings.txt                    # Research findings and notes
+├── Testing/                                # Test dataset (4 classes)
+│   ├── glioma/                             # 300 test images
+│   ├── meningioma/                         # 306 test images  
+│   ├── notumor/                            # 405 test images
+│   └── pituitary/                          # 300 test images
+├── Training/                               # Training dataset (4 classes)
+│   ├── glioma/                             # Training images
+│   ├── meningioma/                         # Training images
+│   ├── notumor/                            # Training images
+│   └── pituitary/                          # Training images
+└── venv/                                   # Virtual environment (local)
 ```
+
+## ✅ Current Implementation
+
+### Completed Features
+- ✅ **Xception Model Training** - Transfer learning model achieving 98.48% test accuracy
+- ✅ **Streamlit Web Application** - Interactive interface for image upload and prediction
+- ✅ **Data Processing Pipeline** - Complete preprocessing and data augmentation
+- ✅ **Model Evaluation** - Comprehensive performance metrics and visualizations
+- ✅ **Sample Images** - Pre-loaded test images for demonstration
+
+### Model Performance
+- **Training Accuracy**: 99.95%
+- **Validation Accuracy**: 99.24%
+- **Test Accuracy**: 98.48%
+- **Architecture**: Xception (pre-trained) + custom classification layers
 
 ## 🔮 Future Enhancements
 
-### Planned Features
-
-- 🔄 **Production Pipeline** - Convert Jupyter notebook to production-ready Python modules
-- 🤖 **CNN Model Integration** - Implement custom CNN architecture alongside Xception
-- 🤝 **Gemini Integration** - Add Google Gemini 2.5 Flash for AI-powered explanations
-- 📊 **Model Interpretability** - Implement GRAD-CAM for visual explanations
-- 🎨 **Enhanced UI/UX** - Improved Streamlit interface with custom styling
-- 📈 **Model Comparison** - Side-by-side comparison of different model architectures
-- 📱 **Mobile Optimization** - Responsive design for mobile devices
+### Core Features to Implement
+- 🔍 **Saliency Maps** - Visual explanations using GRAD-CAM or similar techniques
+- 🤖 **Custom CNN Model** - Train custom architecture to achieve 98%+ accuracy (Challenge 1)
+- 🎯 **Alternative Transfer Learning** - Different base models targeting 99% accuracy (Challenge 2)
+- 🤝 **Multimodal LLM Integration** - User-selectable AI models for explanations (Challenge 3)
+- 💬 **Interactive Chat** - Conversational interface with MRI scan analysis (Challenge 4)
+- 📋 **Comprehensive Reports** - Medical reports with insights and recommendations (Challenge 5)
+- 📊 **Model Comparison Dashboard** - Side-by-side CNN model comparison (Challenge 6)
 
 ### Technical Roadmap
-
-- [ ] **Streamlit App Development** - Interactive web interface for brain tumor classification
-- [ ] **Model Pipeline** - Production-ready inference pipeline
-- [ ] **Image Processing** - Advanced preprocessing and augmentation
-- [ ] **Multi-page App** - Organized sections for prediction, performance, and samples
-- [ ] **Error Handling** - Comprehensive validation and user feedback
-- [ ] **Performance Optimization** - Caching and efficient model loading
+- [ ] **GRAD-CAM Visualization** - Implement saliency mapping for model interpretability
+- [ ] **Custom CNN Architecture** - Design and train from-scratch CNN model
+- [ ] **ResNet/EfficientNet Models** - Test alternative transfer learning approaches
+- [ ] **Gemini 1.5 Flash Integration** - AI-powered scan explanations
+- [ ] **LLM Selection UI** - Interface for choosing explanation models
+- [ ] **Chat Interface** - Multi-turn conversation about MRI analysis
+- [ ] **Report Generation** - PDF/HTML medical report export
+- [ ] **Model Benchmarking** - Interactive dashboard for model comparison
 
 ## 🔬 Dataset Information
 
@@ -179,19 +196,80 @@ This Streamlit application is designed for **easy deployment** on various platfo
 
 ## 🛠️ Installation & Setup
 
-_Coming Soon - Streamlit app implementation in progress_
+### Prerequisites
+- Python 3.8+ recommended
+- Git for cloning the repository
+
+### Local Setup Instructions
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/MisbahAN/Brain-Tumor-Classification.git
+   cd Brain-Tumor-Classification
+   ```
+
+2. **Create a virtual environment**
+   ```bash
+   python -m venv venv
+   
+   # Activate virtual environment
+   # On Windows:
+   venv\Scripts\activate
+   
+   # On macOS/Linux:
+   source venv/bin/activate
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run the Streamlit application**
+   ```bash
+   streamlit run app.py
+   ```
+
+5. **Access the application**
+   - Open your browser and navigate to: `http://localhost:8501`
+   - The app will be running on your local machine
+
+### Note on Model Weights
+The trained model weights (`xception_model.weights.h5`) are approximately 253MB and may not be included in the repository due to size limitations. If you encounter issues loading the model, please refer to the training notebook in `research/notebooks/` to retrain the model.
 
 ## 🚀 Usage
 
-_Coming Soon - Streamlit app interface and features_
+### Web Application
+1. **Launch the app**: Run `streamlit run app.py` in your terminal
+2. **Select input method**:
+   - **Use Sample Image**: Choose from pre-loaded MRI scans
+   - **Upload Your Own**: Upload a brain MRI image (JPG, JPEG, PNG)
+3. **Analyze the image**: Click "Analyze Image" to get predictions
+4. **View results**: See the predicted tumor type, confidence score, and probability distribution
+
+### Model Training
+To train the model yourself:
+1. Open the Jupyter notebook: `research/notebooks/BrainTumorClassification.ipynb`
+2. Download the dataset using the Kaggle command provided in the notebook
+3. Follow the training pipeline to reproduce the results
 
 ## 📱 App Features
 
-_Coming Soon - Interactive components and user interface_
+- 🖼️ **Image Upload/Selection** - Support for JPG, JPEG, PNG formats
+- 🤖 **AI Prediction** - Real-time tumor classification with confidence scores
+- 📊 **Probability Visualization** - Interactive charts showing class probabilities
+- 🎨 **Clean UI** - Modern interface with intuitive design
+- ⚡ **Fast Inference** - Optimized model loading and prediction
+- 📱 **Responsive Design** - Works on desktop and mobile devices
 
-## 🧪 Testing
+## 🧪 Model Validation
 
-_Coming Soon - Model validation and testing procedures_
+The model was trained and validated using:
+- **Training Set**: 5,712 images
+- **Validation Set**: 655 images  
+- **Test Set**: 656 images
+- **Evaluation Metrics**: Accuracy, Precision, Recall, Loss
+- **Cross-validation**: Stratified split to ensure class balance
 
 ---
 
@@ -202,4 +280,4 @@ Portfolio: [MisbahAN.com](https://MisbahAN.com)
 
 ---
 
-_This project represents a complete Streamlit web application for AI-powered brain tumor classification with an intuitive interface for medical professionals and researchers._
+*This project demonstrates deep learning techniques for medical image classification with a focus on brain tumor detection and analysis.*
